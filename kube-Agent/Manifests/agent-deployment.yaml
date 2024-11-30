@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-agent
+  template:
+    metadata:
+      labels:
+        app: kube-agent
+    spec:
+      serviceAccountName: kube-agent-sa
+      containers:
+      - name: kube-agent
+        image: rahulbansod519/kube-agent:v3
+        env:
+        - name: SAAS_URL
+          value: "https://e56e-2409-40c2-400e-e364-519e-6791-7db7-af80.ngrok-free.app"
